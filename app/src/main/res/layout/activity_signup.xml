@@ -7,6 +7,7 @@
     tools:context=".SignupActivity">
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
         android:layout_width="382dp"
         android:layout_height="221dp"
         android:src="@drawable/login"
@@ -21,8 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="647dp"
         android:background="@color/theme2"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="84dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gifImageView"
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:id="@+id/button3"
@@ -30,7 +35,7 @@
             android:layout_height="65dp"
             android:backgroundTint="@color/theme1"
             android:fontFamily="@font/averia_sans_libre_bold"
-            android:onClick="home"
+            android:onClick="firebase"
             android:text="SIGN UP"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +63,7 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/emailSign"
             android:layout_width="282dp"
             android:layout_height="43dp"
             android:ems="10"
@@ -69,7 +74,7 @@
             app:layout_constraintHorizontal_bias="0.403"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.281"
+            app:layout_constraintVertical_bias="0.241"
             tools:ignore="Autofill,LabelFor,MissingConstraints" />
 
         <TextView
@@ -83,7 +88,7 @@
             app:layout_constraintHorizontal_bias="0.171"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.206" />
+            app:layout_constraintVertical_bias="0.184" />
 
         <TextView
             android:id="@+id/textView5"
@@ -96,7 +101,7 @@
             app:layout_constraintHorizontal_bias="0.183"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.443" />
+            app:layout_constraintVertical_bias="0.345" />
 
         <TextView
             android:id="@+id/textView9"
@@ -108,8 +113,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.216"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.368" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView6"
@@ -141,7 +145,22 @@
             app:layout_constraintVertical_bias="0.858" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/confirmSign"
+            android:layout_width="282dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="Enter confirm password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.577"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/passwordSign"
             android:layout_width="282dp"
             android:layout_height="43dp"
             android:ems="10"
@@ -152,7 +171,7 @@
             app:layout_constraintHorizontal_bias="0.403"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.541"
+            app:layout_constraintVertical_bias="0.407"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

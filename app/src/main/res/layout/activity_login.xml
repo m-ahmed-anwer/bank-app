@@ -7,8 +7,8 @@
     tools:context=".LoginActivity">
 
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="359dp"
-        android:layout_height="315dp"
+        android:layout_width="333dp"
+        android:layout_height="234dp"
         android:src="@drawable/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,10 +18,14 @@
         tools:ignore="MissingClass,MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
-        android:background="@color/theme2">
+        android:layout_width="411dp"
+        android:layout_height="538dp"
+        android:background="@color/theme2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.989">
 
         <Button
             android:id="@+id/button3"
@@ -29,6 +33,7 @@
             android:layout_height="65dp"
             android:backgroundTint="@color/theme1"
             android:fontFamily="@font/averia_sans_libre_bold"
+            android:onClick="firebase"
             android:text="LOG IN"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,8 +50,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bree_serif"
             android:text="Log In"
-            android:textSize="42sp"
             android:textColor="@color/black"
+            android:textSize="42sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

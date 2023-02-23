@@ -26,7 +26,7 @@
             android:backgroundTint="@color/theme2"
             android:fontFamily="@font/averia_sans_libre_bold"
             android:onClick="signIn"
-            android:text="Sign In"
+            android:text="LOG IN"
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"

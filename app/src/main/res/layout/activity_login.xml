@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".LoginActivity"
     >
 
@@ -68,6 +69,7 @@
             android:ems="10"
             android:hint="Enter email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.403"
@@ -138,6 +140,7 @@
             android:layout_height="43dp"
             android:ems="10"
             android:hint="Enter password"
+            android:textColor="@color/black"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -37,6 +37,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void back(View v){
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+    }
+
     public void verify(){
         Toasty.info(this, "Please verify your account, Verification link send to "+email, Toast.LENGTH_LONG, true).show();
     }

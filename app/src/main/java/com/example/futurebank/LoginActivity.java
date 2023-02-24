@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,10 +27,13 @@ public class LoginActivity extends AppCompatActivity {
 
     String email=null;
     String password=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
     }
 
@@ -46,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void firebase(View v){
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email =((EditText)findViewById(R.id.emailLog)).getText().toString();
         password= ((EditText)findViewById(R.id.passwordLog)).getText().toString();
@@ -57,12 +63,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
                             if(user.isEmailVerified()){
-
+                                progressBar.setVisibility(View.GONE);
                                 startActivity(i);
                             }else {
+                                progressBar.setVisibility(View.GONE);
                                 verify();
                             }
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             error(task.getException().getMessage());
                         }
                     }

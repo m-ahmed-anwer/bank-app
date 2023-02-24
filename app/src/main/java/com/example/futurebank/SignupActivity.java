@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,8 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.GONE);
     }
 
     public void verify(){
@@ -44,6 +47,8 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void firebase(View v){
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.VISIBLE);
         Intent i = new Intent(this,LoginActivity.class);
         email= ((EditText)findViewById(R.id.emailSign)).getText().toString();
         password= ((EditText)findViewById(R.id.passwordSign)).getText().toString();
@@ -63,27 +68,25 @@ public class SignupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+                                                progressBar.setVisibility(View.GONE);
                                                 verify();
                                                 startActivity(i);
                                             }else {
+                                                progressBar.setVisibility(View.GONE);
                                                 error(task.getException().getMessage());
                                             }
                                         }
                                     });
                             }
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             error(task.getException().getMessage());
                         }
                     }
                 });
         }else {
+            progressBar.setVisibility(View.GONE);
             Toasty.error(this, "Confirm password doesn't match", Toast.LENGTH_SHORT, true).show();
-
         }
-
-
-
-
-
     }
 }

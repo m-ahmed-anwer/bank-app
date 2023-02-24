@@ -41,10 +41,10 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.744"
+            app:layout_constraintVertical_bias="0.756"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -65,15 +65,20 @@
 
         <EditText
             android:id="@+id/emailSign"
-            android:layout_width="282dp"
+            android:layout_width="320dp"
             android:layout_height="43dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint="Enter email"
-            android:textColor="@color/black"
             android:inputType="textEmailAddress"
+            android:paddingLeft="10sp"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/font6"
+            android:textColorHint="@color/font6"
+            android:textColorLink="@color/font6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.241"
@@ -126,7 +131,7 @@
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.334"
+            app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.857" />
@@ -148,15 +153,20 @@
 
         <EditText
             android:id="@+id/confirmSign"
-            android:layout_width="282dp"
+            android:layout_width="320dp"
             android:layout_height="43dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint="Enter confirm password"
             android:inputType="textPassword"
+            android:paddingLeft="10sp"
             android:textColor="@color/black"
+            android:textColorHighlight="@color/font6"
+            android:textColorHint="@color/font6"
+            android:textColorLink="@color/font6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.577"
@@ -164,20 +174,38 @@
 
         <EditText
             android:id="@+id/passwordSign"
-            android:layout_width="282dp"
+            android:layout_width="320dp"
             android:layout_height="43dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint="Enter password"
-            android:textColor="@color/black"
-            android:shadowColor="@color/black"
             android:inputType="textPassword"
+            android:paddingLeft="10sp"
+            android:shadowColor="@color/black"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/font6"
+            android:textColorHint="@color/font6"
+            android:textColorLink="@color/font6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.407"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="77dp"
+        android:layout_height="65dp"
+        android:backgroundTint="@color/black"
+        android:progressBackgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

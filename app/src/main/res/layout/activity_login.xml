@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LoginActivity"
-    >
+    tools:context=".LoginActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="333dp"
@@ -20,14 +19,15 @@
         tools:ignore="MissingClass,MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="411dp"
-        android:layout_height="538dp"
+        android:layout_width="match_parent"
+        android:layout_height="601dp"
         android:background="@color/theme2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989">
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:id="@+id/button3"
@@ -40,7 +40,7 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.744"
@@ -53,6 +53,7 @@
             android:fontFamily="@font/bree_serif"
             android:text="Log In"
             android:textColor="@color/black"
+            android:textColorLink="@color/font6"
             android:textSize="42sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,15 +65,20 @@
 
         <EditText
             android:id="@+id/emailLog"
-            android:layout_width="282dp"
+            android:layout_width="320dp"
             android:layout_height="43dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint="Enter email"
             android:inputType="textEmailAddress"
+            android:paddingLeft="10sp"
             android:textColor="@color/black"
+            android:textColorHighlight="@color/font6"
+            android:textColorHint="@color/font6"
+            android:textColorLink="@color/font6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.281"
@@ -89,7 +95,7 @@
             app:layout_constraintHorizontal_bias="0.171"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.206" />
+            app:layout_constraintVertical_bias="0.213" />
 
         <TextView
             android:id="@+id/textView5"
@@ -102,7 +108,7 @@
             app:layout_constraintHorizontal_bias="0.183"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.443" />
+            app:layout_constraintVertical_bias="0.426" />
 
         <TextView
             android:id="@+id/textView6"
@@ -114,10 +120,10 @@
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.371"
+            app:layout_constraintHorizontal_bias="0.397"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.857" />
+            app:layout_constraintVertical_bias="0.858" />
 
         <TextView
             android:id="@+id/textView7"
@@ -129,27 +135,44 @@
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.671"
+            app:layout_constraintHorizontal_bias="0.691"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.857" />
+            app:layout_constraintVertical_bias="0.858" />
 
         <EditText
             android:id="@+id/passwordLog"
-            android:layout_width="282dp"
+            android:layout_width="320dp"
             android:layout_height="43dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint="Enter password"
-            android:textColor="@color/black"
             android:inputType="textPassword"
+            android:paddingLeft="10sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/font6"
+            android:textColorLink="@color/font6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.541"
             tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="77dp"
+        android:layout_height="65dp"
+        android:backgroundTint="@color/black"
+        android:progressBackgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

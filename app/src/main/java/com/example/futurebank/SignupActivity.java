@@ -24,7 +24,7 @@ import es.dmoral.toasty.Toasty;
 
 public class SignupActivity extends AppCompatActivity {
 
-    String email;
+    String email=null;
     String password;
     String confirmPass;
     @Override

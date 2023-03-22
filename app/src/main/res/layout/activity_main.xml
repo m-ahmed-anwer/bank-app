@@ -10,8 +10,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="412dp"
-            android:background="@drawable/front_rounded"
+            android:layout_height="435dp"
+            android:background="@drawable/rectangle_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +34,7 @@
                     app:layout_constraintHorizontal_bias="0.494"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.078"
+                    app:layout_constraintVertical_bias="0.087"
                     app:lineHeight="45sp"
                     tools:ignore="MissingConstraints" />
 
@@ -52,45 +52,43 @@
                     app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.382"
+                    app:layout_constraintVertical_bias="0.345"
                     app:lineHeight="30sp"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="340dp"
-                    android:layout_height="55dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/white_background"
-                    android:backgroundTint="@color/white"
                     android:fontFamily="@font/averia_sans_libre_bold"
                     android:onClick="signIn"
                     android:text="LOG IN"
                     android:textColor="@color/black"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.492"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.805"
+                    app:layout_constraintVertical_bias="0.774"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button"
                     android:layout_width="340dp"
-                    android:layout_height="55dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/theme1_button"
-                    android:backgroundTint="@color/theme1"
                     android:fontFamily="@font/averia_sans_libre_bold"
                     android:onClick="signUp"
                     android:text="Sign Up"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.492"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.596"
+                    app:layout_constraintVertical_bias="0.576"
                     tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

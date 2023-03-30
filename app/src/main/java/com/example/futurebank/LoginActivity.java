@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     public void back(View v){
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
@@ -60,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email =((EditText)findViewById(R.id.emailLog)).getText().toString();
         password= ((EditText)findViewById(R.id.passwordLog)).getText().toString();
+
+        if(email.isEmpty()||password.isEmpty()){
+            error("Cannot be empty");
+            System.exit(0);
+        }
+
+
         Intent i = new Intent(this,HomeActivity.class);
         auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -54,11 +54,21 @@ public class SignupActivity extends AppCompatActivity {
     public void firebase(View v){
         ProgressBar progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
-        Intent i = new Intent(this,LoginActivity.class);
         email= ((EditText)findViewById(R.id.emailSign)).getText().toString();
         password= ((EditText)findViewById(R.id.passwordSign)).getText().toString();
         confirmPass= ((EditText)findViewById(R.id.confirmSign)).getText().toString();
 
+        if(email.isEmpty()){
+            error("Email cannot be empty");
+            System.exit(0);
+        }
+
+        if(password.isEmpty()){
+            error("Email cannot be empty");
+            System.exit(0);
+        }
+
+        Intent i = new Intent(this,LoginActivity.class);
         if(password.equals(confirmPass)){
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(email,password)

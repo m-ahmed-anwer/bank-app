@@ -59,7 +59,7 @@
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="340dp"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/white_background"
                     android:fontFamily="@font/averia_sans_libre_bold"
                     android:onClick="signIn"
@@ -77,7 +77,7 @@
                 <Button
                     android:id="@+id/button"
                     android:layout_width="340dp"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:background="@drawable/theme1_button"
                     android:fontFamily="@font/averia_sans_libre_bold"
                     android:onClick="signUp"

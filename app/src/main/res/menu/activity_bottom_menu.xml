@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuListHome"
+            android:icon="@drawable/ic_bank"/>
+
+    <item android:id="@+id/menuListCard"
+        android:icon="@drawable/ic_card"/>
+
+    <item android:id="@+id/menuListSett"
+        android:icon="@drawable/ic_settings"/>
+
+
+</menu>

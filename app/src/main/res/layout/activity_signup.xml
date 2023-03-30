@@ -228,17 +228,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
 
-    <ImageView
+    <View
         android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="26dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:onClick="back"
+        android:background="@drawable/chevron_left"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.038"
-        app:srcCompat="@drawable/left" />
+        app:srcCompat="@drawable/chevron_left" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

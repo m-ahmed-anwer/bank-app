@@ -1,15 +1,24 @@
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="1029dp"
-    tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="1dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeActivity"
-    android:fillViewport="true"
-    android:background="@color/theme2"
     >
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="1029dp"
+        android:background="@color/theme2"
+        android:fillViewport="true"
+        tools:context=".HomeActivity"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +28,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="123dp"
+                android:layout_height="100dp"
                 android:background="@color/theme4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,23 +40,23 @@
                     android:layout_width="65dp"
                     android:layout_height="54dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginBottom="30dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.867"
+                    app:layout_constraintHorizontal_bias="0.92"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="143dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/bree_serif"
-                    android:text="Account"
+                    android:text="Home"
                     android:textColor="@color/black"
                     android:textSize="30dp"
                     android:textStyle="bold"
@@ -60,11 +69,11 @@
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/dateView"
                     android:layout_width="149dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="15dp"
-                    android:text="Wednesday, 22 March"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="17dp"
+                    android:text=""
                     android:textColor="@color/font6"
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -80,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/divider"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -96,68 +105,91 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="280dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
 
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="67dp"
+                    android:layout_height="84dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/send"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="74dp"
+                    android:layout_height="84dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="75dp"
+                    android:background="@drawable/recieve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="74dp"
+                    android:layout_height="84dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/rate"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="72dp"
+                    android:layout_height="84dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginTop="388dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.684"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.454"
-                app:srcCompat="@drawable/top" />
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="82dp"
-                android:layout_marginTop="93dp"
-                android:layout_marginEnd="115dp"
-                android:layout_marginBottom="544dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView11"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-                app:srcCompat="@drawable/down" />
+                <com.example.futurebank.CreditCardView
+                    android:id="@+id/creditCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_margin="35dp"
+                    android:onClick="account"
+                    tools:ignore="MissingClass,MissingConstraints"
+                    tools:layout_editor_absoluteX="6dp"
+                    tools:layout_editor_absoluteY="414dp" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send Money"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.739"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.359" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recieve Money"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.184"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    </ScrollView>
 
-</ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigator"
+        app:menu="@menu/activity_bottom_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>

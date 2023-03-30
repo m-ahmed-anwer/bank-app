@@ -2,51 +2,35 @@ package com.example.futurebank;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity {
-
+public class AccountActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationViewiew;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        String date="";
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMM");
-        String dateString = dateFormat.format(currentDate);
-         date=dateString.toString();
+        setContentView(R.layout.activity_account);
 
-
-        ((TextView)findViewById(R.id.dateView)).setText(date);
 
         bottomNavigationViewiew = findViewById(R.id.bottomNavigator);
-        bottomNavigationViewiew.setSelectedItemId(R.id.menuListHome);
+        bottomNavigationViewiew.setSelectedItemId(R.id.menuListCard);
 
         bottomNavigationViewiew.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menuListHome:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                     case R.id.menuListCard:
-                        startActivity(new Intent(getApplicationContext(),AccountActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
 
                     case R.id.menuListSett:
@@ -58,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
     }
 }

@@ -59,16 +59,16 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public void showsend(){
+    public void showsend(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
-    public void showrecieve(){
+    public void showrecieve(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
-    public void showcard(){
+    public void showcard(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
-    public void showrate(){
+    public void showrate(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
 }

@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsActivity extends AppCompatActivity {
+
 
     BottomNavigationView bottomNavigationViewiew;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-
 
         bottomNavigationViewiew = findViewById(R.id.bottomNavigator);
         bottomNavigationViewiew.setSelectedItemId(R.id.menuListSett);
@@ -38,12 +40,15 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.menuListSett:
                         return true;
                 }
-
                 return false;
             }
         });
+    }
 
-
+    public void signout(View v){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signOut();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
 }

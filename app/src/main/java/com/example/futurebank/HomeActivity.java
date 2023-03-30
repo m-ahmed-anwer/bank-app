@@ -54,10 +54,21 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                 }
-
                 return false;
             }
         });
+    }
 
+    public void showsend(){
+        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+    }
+    public void showrecieve(){
+        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+    }
+    public void showcard(){
+        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+    }
+    public void showrate(){
+        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
 }

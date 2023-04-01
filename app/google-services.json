@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "412332177423",
+    "project_id": "android-d0408",
+    "storage_bucket": "android-d0408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412332177423:android:135ae06f311f8d6e3f8b7a",
+        "android_client_info": {
+          "package_name": "com.app.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412332177423-vm7spe8kdkt0egkp7j50vtatr6k5ouar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2dZi9iDn8YyVQVEaZkzIWzKiz5pXFGH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412332177423-vm7spe8kdkt0egkp7j50vtatr6k5ouar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412332177423:android:9113b0aa6c89021e3f8b7a",
+        "android_client_info": {
+          "package_name": "com.example.futurebank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412332177423-vm7spe8kdkt0egkp7j50vtatr6k5ouar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2dZi9iDn8YyVQVEaZkzIWzKiz5pXFGH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412332177423-vm7spe8kdkt0egkp7j50vtatr6k5ouar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

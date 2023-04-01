@@ -5,6 +5,7 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_700">#FF018786</color>
     <color name="teal_200">#FF018786</color>
+    <color name="red">#ff0000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="theme1">#141E27</color>
@@ -13,6 +14,12 @@
     <color name="theme4" >#dddddd</color>
     <color name="theme5">#aaaaaa</color>
     <color name="theme6">#acadaf</color>
+    <color name="theme7">#cccccc</color>
+    <color name="theme8">#f5f5f5</color>
+    <color name="font3">#3a3a3a</color>
     <color name="font4">#444444</color>
+    <color name="font5">#5c5c5c</color>
+
+
     <color name="font6">#666666</color>
 </resources>

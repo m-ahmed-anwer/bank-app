@@ -44,7 +44,6 @@ public class SignupActivity extends AppCompatActivity {
         Toasty.success(this, "Email verification link send to "+email, Toast.LENGTH_LONG, true).show();
     }
     public void error(String message){
-
         Toasty.error(this, message, Toast.LENGTH_LONG, true).show();
     }
     public void login(View v){

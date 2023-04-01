@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import es.dmoral.toasty.Toasty;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -48,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void signout(View v){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
+        Toasty.info(this, "You have been Signed Out", Toast.LENGTH_SHORT, true).show();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 

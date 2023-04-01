@@ -10,6 +10,7 @@
         android:id="@+id/menuListHome"
         android:name="com.example.futurebank.HomeActivity"
         android:label="activity_home"
+
         tools:layout="@layout/activity_home" />
     <activity
         android:id="@+id/menuListCard"

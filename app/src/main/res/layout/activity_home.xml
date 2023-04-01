@@ -190,6 +190,7 @@
         android:id="@+id/bottomNavigator"
         app:menu="@menu/activity_bottom_menu"
         android:layout_width="wrap_content"
+        android:background="@color/theme7"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

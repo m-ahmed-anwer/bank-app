@@ -60,15 +60,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showsend(View v){
-        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+        startActivity(new Intent(getApplicationContext(),SendMoney.class));
     }
     public void showrecieve(View v){
-        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+        startActivity(new Intent(getApplicationContext(),RecieveMoney.class));
     }
     public void showcard(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
     public void showrate(View v){
-        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+        startActivity(new Intent(getApplicationContext(),Currencyrate.class));
     }
 }

@@ -51,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void signout(View v){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
+        SharedPrefManager.clear();
         Toasty.info(this, "You have been Signed Out", Toast.LENGTH_SHORT, true).show();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }

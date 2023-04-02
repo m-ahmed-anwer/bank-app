@@ -23,12 +23,30 @@ public class LoginActivity extends AppCompatActivity {
     String email=null;
     String password=null;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+
+        SharedPrefManager.init(getApplicationContext());
+
+
+        EditText emailEditText = findViewById(R.id.emailForget);
+        EditText passwordEditText = findViewById(R.id.passwordLog);
+
+        String savedEmail = SharedPrefManager.getEmail();
+        String savedPassword = SharedPrefManager.getPassword();
+
+        if (savedEmail != null && savedPassword != null) {
+            emailEditText.setText(savedEmail);
+            passwordEditText.setText(savedPassword);
+            findViewById(R.id.constraintLayout8).performClick();
+        }
 
     }
 
@@ -61,8 +79,6 @@ public class LoginActivity extends AppCompatActivity {
             error("Cannot be empty");
             System.exit(0);
         }
-
-
         Intent i = new Intent(this,HomeActivity.class);
         auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -72,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = auth.getCurrentUser();
                             if(user.isEmailVerified()){
                                 progressBar.setVisibility(View.GONE);
+                                SharedPrefManager.saveUser(email, password);
                                 startActivity(i);
                             }else {
                                 progressBar.setVisibility(View.GONE);

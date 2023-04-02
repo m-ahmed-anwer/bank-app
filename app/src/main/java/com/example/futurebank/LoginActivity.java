@@ -1,14 +1,10 @@
 package com.example.futurebank;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        email =((EditText)findViewById(R.id.emailLog)).getText().toString();
+        email =((EditText)findViewById(R.id.emailForget)).getText().toString();
         password= ((EditText)findViewById(R.id.passwordLog)).getText().toString();
 
         if(email.isEmpty()||password.isEmpty()){
@@ -88,6 +83,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public void forget(View v){
+        Intent i = new Intent(this,ForgetPassword.class);
+        startActivity(i);
     }
 
 

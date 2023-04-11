@@ -2,14 +2,11 @@ package com.example.futurebank;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import android.content.Intent;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -89,7 +86,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showsend(View v){
-
         myRef.setValue("Edit");
     }
     public void showrecieve(View v){
@@ -106,10 +102,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-    public void showcard(View v){
+    public void showhistory(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
     }
     public void showrate(View v){
-        startActivity(new Intent(getApplicationContext(),Currencyrate.class));
+        startActivity(new Intent(getApplicationContext(), Exchangerate.class));
     }
 }

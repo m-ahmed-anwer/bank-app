@@ -27,7 +27,7 @@
             </intent-filter>
         </service>
         <activity
-            android:name=".Currencyrate"
+            android:name=".Exchangerate"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

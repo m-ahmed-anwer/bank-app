@@ -19,6 +19,6 @@
         tools:layout="@layout/activity_account" />
     <activity
         android:id="@+id/menuListSett"
-        android:name="com.example.futurebank.SettingsActivity"
-        android:label="SettingsActivity" />
+        android:name="com.example.futurebank.SettingsPage"
+        android:label="SettingsPage" />
 </navigation>

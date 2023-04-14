@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationViewiew;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     DatabaseReference myRef = database.getReference("message");
 
 
@@ -43,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
          date=dateString.toString();
 
 
+         /*
         FirebaseMessaging.getInstance().subscribeToTopic("Future Bank request Ahmed")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -54,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
                 });
-
+    */
 
         ((TextView)findViewById(R.id.dateView)).setText(date);
 
@@ -86,9 +88,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showsend(View v){
-        myRef.setValue("Edit");
+        //myRef.setValue("Edit");
+        startActivity(new Intent(getApplicationContext(),SendMoney.class));
     }
     public void showrecieve(View v){
+        /*
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,6 +105,8 @@ public class HomeActivity extends AppCompatActivity {
                 Log.w("","Failed");
             }
         });
+         */
+        startActivity(new Intent(getApplicationContext(),RecieveMoney.class));
     }
     public void showhistory(View v){
         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));

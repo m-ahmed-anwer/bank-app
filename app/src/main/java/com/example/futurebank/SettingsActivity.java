@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,11 +18,16 @@ import es.dmoral.toasty.Toasty;
 public class SettingsActivity extends AppCompatActivity {
 
 
+    String versionName = BuildConfig.VERSION_NAME;
     BottomNavigationView bottomNavigationViewiew;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+
+
+        TextView t1 = (findViewById(R.id.textView17));
+        t1.setText(versionName);
 
         bottomNavigationViewiew = findViewById(R.id.bottomNavigator);
         bottomNavigationViewiew.setSelectedItemId(R.id.menuListSett);

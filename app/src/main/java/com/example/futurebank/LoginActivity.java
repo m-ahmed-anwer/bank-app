@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -22,8 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
     String email=null;
     String password=null;
-
-
 
 
     @Override
@@ -48,8 +48,27 @@ public class LoginActivity extends AppCompatActivity {
             findViewById(R.id.constraintLayout8).performClick();
         }
 
+        View mainView = findViewById(R.id.loginActivity);
+        mainView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    hideKeyboard();
+                }
+                return false;
+            }
+        });
+
     }
 
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
+        View view = getCurrentFocus();
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
     public void back(View v){
         Intent i = new Intent(this,MainActivity.class);

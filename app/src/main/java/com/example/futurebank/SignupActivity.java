@@ -28,8 +28,8 @@ import es.dmoral.toasty.Toasty;
 public class SignupActivity extends AppCompatActivity {
 
     String email=null;
-    String password;
-    String confirmPass;
+    String password=null;
+    String confirmPass=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +58,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void back(View v){
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
+        startActivity( new Intent(this,MainActivity.class));
     }
 
     public void verify(){
@@ -69,60 +68,62 @@ public class SignupActivity extends AppCompatActivity {
         Toasty.error(this, message, Toast.LENGTH_LONG, true).show();
     }
     public void login(View v){
-        Intent i = new Intent(this,LoginActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this,LoginActivity.class));
     }
     public void firebase(View v){
         ProgressBar progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
-        email= ((EditText)findViewById(R.id.emailSign)).getText().toString();
-        password= ((EditText)findViewById(R.id.passwordSign)).getText().toString();
-        confirmPass= ((EditText)findViewById(R.id.confirmSign)).getText().toString();
-
-        if(email.isEmpty()){
-            error("Email cannot be empty");
-            System.exit(0);
-        }
-
-        if(password.isEmpty()){
-            error("Email cannot be empty");
-            System.exit(0);
-        }
+        email= ((EditText)findViewById(R.id.emailSign)).getText().toString().trim();
+        password= ((EditText)findViewById(R.id.passwordSign)).getText().toString().trim();
+        confirmPass= ((EditText)findViewById(R.id.confirmSign)).getText().toString().trim();
 
         Intent i = new Intent(this,LoginActivity.class);
-        if(password.equals(confirmPass)){
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            auth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user =auth.getCurrentUser();
-                            if(user !=null){
-                                user.sendEmailVerification()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                progressBar.setVisibility(View.GONE);
-                                                verify();
-                                                startActivity(i);
-                                            }else {
-                                                progressBar.setVisibility(View.GONE);
-                                                error(task.getException().getMessage());
-                                            }
+
+        if(email.isEmpty()==false){
+            if(password.isEmpty()==false){
+                if(password.equals(confirmPass)){
+
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.createUserWithEmailAndPassword(email,password)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser user =auth.getCurrentUser();
+                                        if(user !=null){
+                                            user.sendEmailVerification()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if(task.isSuccessful()){
+                                                                progressBar.setVisibility(View.GONE);
+                                                                verify();
+                                                                startActivity(i);
+                                                            }else {
+                                                                progressBar.setVisibility(View.GONE);
+                                                                error(task.getException().getMessage());
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                    });
-                            }
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                            error(task.getException().getMessage());
-                        }
-                    }
-                });
+                                    } else {
+                                        progressBar.setVisibility(View.GONE);
+                                        error(task.getException().getMessage());
+                                    }
+                                }
+                            });
+
+                }else {
+                    progressBar.setVisibility(View.GONE);
+                    Toasty.error(this, "Confirm password doesn't match", Toast.LENGTH_SHORT, true).show();
+                }
+            }else {
+                progressBar.setVisibility(View.GONE);
+                Toasty.error(this, "Password Cannot be empty", Toast.LENGTH_SHORT, true).show();
+            }
         }else {
             progressBar.setVisibility(View.GONE);
-            Toasty.error(this, "Confirm password doesn't match", Toast.LENGTH_SHORT, true).show();
+            Toasty.error(this, "Email Cannot be empty", Toast.LENGTH_SHORT, true).show();
         }
 
 

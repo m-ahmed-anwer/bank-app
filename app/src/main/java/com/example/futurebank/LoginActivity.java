@@ -91,38 +91,47 @@ public class LoginActivity extends AppCompatActivity {
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        email =((EditText)findViewById(R.id.emailForget)).getText().toString();
-        password= ((EditText)findViewById(R.id.passwordLog)).getText().toString();
+        email =((EditText)findViewById(R.id.emailLogin)).getText().toString().trim();
+        password= ((EditText)findViewById(R.id.passwordLog)).getText().toString().trim();
 
-        if(email.isEmpty()||password.isEmpty()){
-            error("Cannot be empty");
-            System.exit(0);
-        }
+
         Intent i = new Intent(this,HomeActivity.class);
-        auth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
-                            if(user.isEmailVerified()){
-                                progressBar.setVisibility(View.GONE);
-                                SharedPrefManager.saveUser(email, password);
-                                startActivity(i);
-                            }else {
-                                progressBar.setVisibility(View.GONE);
-                                verify();
+        if(email.isEmpty()==false){
+            if(password.isEmpty()==false){
+                auth.signInWithEmailAndPassword(email,password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    if(user.isEmailVerified()){
+                                        progressBar.setVisibility(View.GONE);
+                                        SharedPrefManager.saveUser(email, password);
+                                        startActivity(i);
+                                    }else {
+                                        progressBar.setVisibility(View.GONE);
+                                        verify();
+                                    }
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    error(task.getException().getMessage());
+                                }
                             }
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                            error(task.getException().getMessage());
-                        }
-                    }
-                });
+                        });
+            }else {
+                progressBar.setVisibility(View.GONE);
+                Toasty.error(this, "Password cannot be empty", Toast.LENGTH_SHORT, true).show();
+
+            }
+        }else {
+            progressBar.setVisibility(View.GONE);
+            Toasty.error(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
+        }
+
     }
 
 
-    public void forget(View v){
+    public void goforget(View v){
         Intent i = new Intent(this,ForgetPassword.class);
         startActivity(i);
     }

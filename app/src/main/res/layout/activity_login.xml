@@ -47,7 +47,7 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/emailForget"
+            android:id="@+id/emailLogin"
             android:layout_width="320dp"
             android:layout_height="43dp"
             android:background="@drawable/input_background"
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="46dp"
-            android:onClick="forget"
+            android:onClick="goforget"
             android:text="Forget Password?"
             android:textColor="@color/black"
             android:textSize="16sp"

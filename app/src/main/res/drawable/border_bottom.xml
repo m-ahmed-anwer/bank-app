@@ -3,8 +3,8 @@
     <item android:left="-10dp" android:right="-10dp" android:top="-10dp">
         <shape android:shape="rectangle">
             <stroke
-                android:width="0.3dp"
-                android:color="#000000" />
+                android:width="0.5dp"
+                android:color="#808080" />
         </shape>
     </item>
 </layer-list>

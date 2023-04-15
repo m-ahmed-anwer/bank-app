@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="46dp"
-            android:onClick="goforget"
+            android:onClick="forget"
             android:text="Forget Password?"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -194,19 +194,6 @@
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="77dp"
-        android:layout_height="65dp"
-        android:backgroundTint="@color/black"
-        android:progressBackgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
 
     <View
         android:id="@+id/imageView2"

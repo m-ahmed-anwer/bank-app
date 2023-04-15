@@ -11,6 +11,7 @@ public class SharedPrefManager {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
 
+
     private static SharedPreferences sharedPreferences = null;
     private static SharedPreferences.Editor editor = null;
 
@@ -38,5 +39,7 @@ public class SharedPrefManager {
         editor.remove(KEY_EMAIL).apply();
         editor.remove(KEY_PASSWORD).apply();
     }
+
+
 
 }

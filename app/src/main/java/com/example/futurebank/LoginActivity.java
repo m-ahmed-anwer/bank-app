@@ -3,6 +3,7 @@ package com.example.futurebank;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -24,19 +25,17 @@ public class LoginActivity extends AppCompatActivity {
 
     String email=null;
     String password=null;
-
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
 
         SharedPrefManager.init(getApplicationContext());
 
 
-        EditText emailEditText = findViewById(R.id.emailForget);
+        EditText emailEditText = findViewById(R.id.emailLogin);
         EditText passwordEditText = findViewById(R.id.passwordLog);
 
         String savedEmail = SharedPrefManager.getEmail();
@@ -88,8 +87,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void firebase(View v){
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading.....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email =((EditText)findViewById(R.id.emailLogin)).getText().toString().trim();
         password= ((EditText)findViewById(R.id.passwordLog)).getText().toString().trim();
@@ -105,33 +108,33 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = auth.getCurrentUser();
                                     if(user.isEmailVerified()){
-                                        progressBar.setVisibility(View.GONE);
+                                        progressDialog.dismiss();
                                         SharedPrefManager.saveUser(email, password);
                                         startActivity(i);
                                     }else {
-                                        progressBar.setVisibility(View.GONE);
+                                        progressDialog.dismiss();
                                         verify();
                                     }
                                 } else {
-                                    progressBar.setVisibility(View.GONE);
+                                    progressDialog.dismiss();
                                     error(task.getException().getMessage());
                                 }
                             }
                         });
             }else {
-                progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 Toasty.error(this, "Password cannot be empty", Toast.LENGTH_SHORT, true).show();
 
             }
         }else {
-            progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
             Toasty.error(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
         }
 
     }
 
 
-    public void goforget(View v){
+    public void forget(View v){
         Intent i = new Intent(this,ForgetPassword.class);
         startActivity(i);
     }

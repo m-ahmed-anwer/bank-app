@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     progressDialog.dismiss();
+                                    SharedPrefManager.clear();
                                     error(task.getException().getMessage());
                                 }
                             }

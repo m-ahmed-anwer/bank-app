@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,12 +33,11 @@ public class SignupActivity extends AppCompatActivity {
     String email=null;
     String password=null;
     String confirmPass=null;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        ProgressBar progressBar = findViewById(R.id.progressBar2);
-        progressBar.setVisibility(View.GONE);
 
         View mainView = findViewById(R.id.mainIdSignup);
         mainView.setOnTouchListener(new View.OnTouchListener() {
@@ -73,8 +73,12 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(new Intent(this,LoginActivity.class));
     }
     public void firebase(View v){
-        ProgressBar progressBar = findViewById(R.id.progressBar2);
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Setting things up...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
         email= ((EditText)findViewById(R.id.emailSign)).getText().toString().trim();
         password= ((EditText)findViewById(R.id.passwordSign)).getText().toString().trim();
         confirmPass= ((EditText)findViewById(R.id.confirmSign)).getText().toString().trim();
@@ -109,39 +113,39 @@ public class SignupActivity extends AppCompatActivity {
                                                                         @Override
                                                                         public void onComplete(@NonNull Task<Void> task) {
                                                                             if (task.isSuccessful()) {
-                                                                                progressBar.setVisibility(View.GONE);
+                                                                                progressDialog.dismiss();
                                                                                 verify();
                                                                                 startActivity(i);
                                                                             } else {
-                                                                                progressBar.setVisibility(View.GONE);
+                                                                                progressDialog.dismiss();
                                                                                 error(task.getException().getMessage());
                                                                             }
                                                                         }
                                                                     });
                                                         } else {
-                                                            progressBar.setVisibility(View.GONE);
+                                                            progressDialog.dismiss();
                                                             error(task.getException().getMessage());
                                                         }
                                                     }
                                                 });
                                         }
                                     } else {
-                                        progressBar.setVisibility(View.GONE);
+                                        progressDialog.dismiss();
                                         error(task.getException().getMessage());
                                     }
                                 }
                             });
 
                 }else {
-                    progressBar.setVisibility(View.GONE);
+                    progressDialog.dismiss();
                     Toasty.error(this, "Confirm password doesn't match", Toast.LENGTH_SHORT, true).show();
                 }
             }else {
-                progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 Toasty.error(this, "Password Cannot be empty", Toast.LENGTH_SHORT, true).show();
             }
         }else {
-            progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
             Toasty.error(this, "Email Cannot be empty", Toast.LENGTH_SHORT, true).show();
         }
 

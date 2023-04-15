@@ -112,7 +112,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_marginStart="70dp"
                     android:layout_marginBottom="10dp"
@@ -162,7 +162,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_marginStart="70dp"
                     android:layout_marginTop="32dp"
@@ -212,7 +212,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="97dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="70dp"
@@ -263,7 +263,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="97dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_marginEnd="70dp"
                     android:layout_marginBottom="10dp"
@@ -311,16 +311,16 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:layout_marginTop="388dp"
+                android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 <com.example.futurebank.CreditCardView
                     android:id="@+id/creditCardView"
@@ -341,13 +341,16 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigator"
-        app:menu="@menu/activity_bottom_menu"
         android:layout_width="wrap_content"
-        android:background="@color/theme7"
         android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bottom_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/activity_bottom_menu"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

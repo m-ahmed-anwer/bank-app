@@ -91,6 +91,51 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView15">
 
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginBottom="28dp"
+                            android:textColor="@color/font5"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/roundCardView" />
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="26dp"
+                            android:textColor="@color/font3"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toEndOf="@+id/roundCardView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/roundCardView"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="18dp"
+                            android:layout_marginBottom="19dp"
+                            android:elevation="0dp"
+                            app:cardCornerRadius="35dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:scaleType="centerInside" />
+                        </androidx.cardview.widget.CardView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -258,7 +303,7 @@
                                 android:layout_marginEnd="35dp"
                                 android:layout_marginBottom="15dp"
                                 android:text="English"
-                                android:textColor="@color/font4"
+                                android:textColor="@color/font5"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -313,7 +358,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="35dp"
                             android:layout_marginBottom="15dp"
-                            android:textColor="@color/font4"
+                            android:textColor="@color/font5"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -352,7 +397,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="45dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="80dp"
+                        android:layout_marginBottom="100dp"
                         android:background="@drawable/settings_bg"
                         android:onClick="signout"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -464,12 +509,15 @@
             android:id="@+id/bottomNavigator"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:background="@color/theme7"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bottom_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/activity_bottom_menu"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

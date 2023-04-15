@@ -9,6 +9,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout9"
             android:layout_width="match_parent"
             android:layout_height="435dp"
             android:background="@drawable/rectangle_1"
@@ -40,8 +41,8 @@
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="282dp"
-                    android:layout_height="38dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:text="No Card Required, Just your Phone"
                     android:textAlignment="center"
@@ -53,7 +54,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.345"
-                    app:lineHeight="30sp"
                     tools:ignore="MissingConstraints" />
 
                 <Button
@@ -97,9 +97,11 @@
             android:id="@+id/gifImageView2"
             android:layout_width="359dp"
             android:layout_height="315dp"
+            android:layout_marginTop="4dp"
             android:src="@drawable/start"
-            tools:ignore="MissingClass,MissingConstraints"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="4dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingClass,MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

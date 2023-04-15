@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import es.dmoral.toasty.Toasty;
 
@@ -91,20 +93,37 @@ public class SignupActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user =auth.getCurrentUser();
                                         if(user !=null){
-                                            user.sendEmailVerification()
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
-                                                                progressBar.setVisibility(View.GONE);
-                                                                verify();
-                                                                startActivity(i);
-                                                            }else {
-                                                                progressBar.setVisibility(View.GONE);
-                                                                error(task.getException().getMessage());
-                                                            }
+                                            String photoUrl = "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
+                                            UserProfileChangeRequest profileUpdates =new UserProfileChangeRequest.Builder()
+                                                    .setDisplayName("User")
+                                                    .setPhotoUri(Uri.parse(photoUrl))
+                                                    .build();
+
+                                            user.updateProfile(profileUpdates)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            user.sendEmailVerification()
+                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                progressBar.setVisibility(View.GONE);
+                                                                                verify();
+                                                                                startActivity(i);
+                                                                            } else {
+                                                                                progressBar.setVisibility(View.GONE);
+                                                                                error(task.getException().getMessage());
+                                                                            }
+                                                                        }
+                                                                    });
+                                                        } else {
+                                                            progressBar.setVisibility(View.GONE);
+                                                            error(task.getException().getMessage());
                                                         }
-                                                    });
+                                                    }
+                                                });
                                         }
                                     } else {
                                         progressBar.setVisibility(View.GONE);

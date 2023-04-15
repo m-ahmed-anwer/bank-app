@@ -12,14 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -85,12 +90,32 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         String userId = null;
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             userId = user.getUid();
+
+            String temp=user.getEmail();
+            String arr[]=temp.split("@");
+            String userDisplayName= user.getDisplayName();
+            String photoUrl =user.getPhotoUrl().toString();
+
+            ((TextView)findViewById(R.id.textView30)).setText("@"+arr[0]);
+            ((TextView)findViewById(R.id.textView29)).setText(userDisplayName);
+
+            ImageView imageView = findViewById(R.id.imageView3);
+            imageView.setBackgroundResource(R.drawable.image_background);
+            Glide.with(this)
+                    .load(photoUrl)
+                    .into(imageView);
+
+
+
+
         }
+
+
+
 
         FirebaseApp.initializeApp(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();

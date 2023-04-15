@@ -163,7 +163,7 @@
 
             <TextView
                 android:id="@+id/button3"
-                android:layout_width="82dp"
+                android:layout_width="wrap_content"
                 android:layout_height="31dp"
                 android:fontFamily="@font/averia_sans_libre_bold"
                 android:text="LOG IN"

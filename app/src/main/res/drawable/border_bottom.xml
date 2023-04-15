@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <stroke
                 android:width="0.6dp"
-                android:color="#808080" />
+                android:color="@color/theme6" />
             <solid android:color="#00000000" />
             <!-- The above line sets the color of the rectangle to transparent -->
         </shape>

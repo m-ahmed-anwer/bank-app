@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,16 +34,30 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("message");
 
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+        int edgeSize = ViewConfiguration.get(this).getScaledEdgeSlop();
+        if (event.getAction() == MotionEvent.ACTION_DOWN && x < edgeSize && y > getActionBar().getHeight()) {
+            // Touch event is near the left edge of the screen, but not close enough to trigger the back gesture
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         String date="";
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMM");
         String dateString = dateFormat.format(currentDate);
          date=dateString.toString();
+
 
 
          /*

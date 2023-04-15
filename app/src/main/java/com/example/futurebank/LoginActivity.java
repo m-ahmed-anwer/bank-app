@@ -108,8 +108,9 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = auth.getCurrentUser();
                                     if(user.isEmailVerified()){
-                                        progressDialog.dismiss();
                                         SharedPrefManager.saveUser(email, password);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
+                                        progressDialog.dismiss();
                                         startActivity(i);
                                     }else {
                                         progressDialog.dismiss();

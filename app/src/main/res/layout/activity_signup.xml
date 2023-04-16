@@ -60,7 +60,7 @@
             android:textColorHighlight="@color/font6"
             android:textColorHint="@color/font6"
             android:textColorLink="@color/font6"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -152,7 +152,7 @@
             android:textColorHighlight="@color/font6"
             android:textColorHint="@color/font6"
             android:textColorLink="@color/font6"
-            android:textSize="16sp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -175,7 +175,7 @@
             android:textColorHighlight="@color/font6"
             android:textColorHint="@color/font6"
             android:textColorLink="@color/font6"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -214,6 +214,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="29dp"
+            android:layout_height="33dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            android:onClick="visibility"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordSign"
+            app:layout_constraintEnd_toEndOf="@+id/passwordSign"
+            app:layout_constraintTop_toTopOf="@+id/passwordSign"
+            app:srcCompat="@drawable/ic_visibility_off" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

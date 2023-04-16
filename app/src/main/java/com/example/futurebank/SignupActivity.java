@@ -9,10 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     String email=null;
     String password=null;
     String confirmPass=null;
+    private boolean buttonOn=false;
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,26 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void visibility(View v){
+        EditText password =findViewById(R.id.passwordSign);
+        EditText confirmPas =findViewById(R.id.confirmSign);
+        ImageButton btn1= findViewById(R.id.imageButton8);
+
+        if(buttonOn){
+            password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            confirmPas.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn1.setImageResource(R.drawable.ic_visibility_off);
+            buttonOn=false;
+        }else {
+            password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            confirmPas.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn1.setImageResource(R.drawable.ic_visibility);
+            buttonOn=true;
+        }
+
+    }
+
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(SignupActivity.INPUT_METHOD_SERVICE);
         View view = getCurrentFocus();

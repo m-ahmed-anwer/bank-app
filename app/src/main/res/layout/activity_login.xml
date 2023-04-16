@@ -59,7 +59,7 @@
             android:textColorHighlight="@color/font6"
             android:textColorHint="@color/font6"
             android:textColorLink="@color/font6"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
@@ -133,18 +133,31 @@
             android:background="@drawable/input_background"
             android:ems="10"
             android:hint="Enter password"
-            android:inputType="textPassword"
+
+            android:inputType="text|textPassword"
             android:paddingLeft="10sp"
             android:textColor="@color/black"
             android:textColorHint="@color/font6"
             android:textColorLink="@color/font6"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="29dp"
+            android:layout_height="33dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            android:onClick="visibility"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordLog"
+            app:layout_constraintEnd_toEndOf="@+id/passwordLog"
+            app:layout_constraintTop_toTopOf="@+id/passwordLog"
+            app:srcCompat="@drawable/ic_visibility_off" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout8"

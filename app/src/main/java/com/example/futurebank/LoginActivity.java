@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     String email=null;
     String password=null;
     private ProgressDialog progressDialog;
+    private boolean buttonOn=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    public void visibility(View v){
+        EditText password =findViewById(R.id.passwordLog);
+        ImageButton btn1= findViewById(R.id.imageButton7);
+
+        if(buttonOn){
+            password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn1.setImageResource(R.drawable.ic_visibility_off);
+            buttonOn=false;
+        }else {
+            password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn1.setImageResource(R.drawable.ic_visibility);
+            buttonOn=true;
+        }
     }
 
     private void hideKeyboard() {
@@ -140,6 +162,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this,ForgetPassword.class);
         startActivity(i);
     }
+
+
 
 
 }

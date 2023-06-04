@@ -2,6 +2,8 @@ package com.example.futurebank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +25,7 @@ import es.dmoral.toasty.Toasty;
 
 public class Exchangerate extends AppCompatActivity {
 
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class Exchangerate extends AppCompatActivity {
             }
         });
     }
+
+
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
         View view = getCurrentFocus();
@@ -52,13 +57,19 @@ public class Exchangerate extends AppCompatActivity {
     }
 
     public void convert(View v) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Calculating");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         EditText from = findViewById(R.id.conversion);
         TextView to = findViewById(R.id.convertedTo);
 
-        double num = Double.parseDouble(from.getText().toString());
+        double amount = Double.parseDouble(from.getText().toString());
 
 
-        String apiKey = "59931a41a8b52a2d88422cbf";
+        final String apiKey = "59931a41a8b52a2d88422cbf";
         String sourceCurrency = "LKR";
         String targetCurrency = "USD";
 
@@ -69,12 +80,12 @@ public class Exchangerate extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
                             double conversionRate = response.getJSONObject("conversion_rates").getDouble(targetCurrency);
-                            double finalRate = conversionRate * num;
-                            to.setText(String.format("%.2f "+sourceCurrency+" = %.2f "+targetCurrency, num, finalRate));
-
+                            double finalRate = conversionRate * amount;
+                            to.setText(String.format("%.2f "+sourceCurrency+" = %.2f "+targetCurrency, amount, finalRate));
+                            progressDialog.dismiss();
                         } catch (JSONException e) {
+                            progressDialog.dismiss();
                             error(e.getMessage().toString());
                         }
 
@@ -82,10 +93,11 @@ public class Exchangerate extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         error(error.getMessage().toString());
                     }
                 });
-            Volley.newRequestQueue(this).add(jsonObjectRequest);
+                Volley.newRequestQueue(this).add(jsonObjectRequest);
 
     }
 }

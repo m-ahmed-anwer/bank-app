@@ -136,6 +136,8 @@
                                 android:layout_marginBottom="0dp"
                                 android:scaleType="centerInside" />
                         </androidx.cardview.widget.CardView>
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -230,7 +232,7 @@
                                 android:layout_marginStart="14dp"
                                 android:layout_marginTop="14dp"
                                 android:layout_marginBottom="14dp"
-                                android:text="Profile"
+                                android:text="Update Profile"
                                 android:textColor="@color/font3"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"

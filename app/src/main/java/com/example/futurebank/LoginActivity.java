@@ -18,10 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import es.dmoral.toasty.Toasty;
 
@@ -120,7 +125,8 @@ public class LoginActivity extends AppCompatActivity {
         password= ((EditText)findViewById(R.id.passwordLog)).getText().toString().trim();
 
 
-        Intent i = new Intent(this,HomeActivity.class);
+        Intent i = new Intent(this,InitialDetails.class);
+        Intent j = new Intent(this,HomeActivity.class);
         if(email.isEmpty()==false){
             if(password.isEmpty()==false){
                 auth.signInWithEmailAndPassword(email,password)
@@ -130,10 +136,34 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = auth.getCurrentUser();
                                     if(user.isEmailVerified()){
-                                        SharedPrefManager.saveUser(email, password);
-                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
-                                        progressDialog.dismiss();
-                                        startActivity(i);
+
+                                        DocumentReference userRef = FirebaseFirestore.getInstance()
+                                                .collection("users")
+                                                .document(user.getUid());
+                                        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                if (documentSnapshot.exists()) {
+                                                    boolean isFirstTimeVerification = documentSnapshot.getBoolean("isFirstTimeVerification");
+                                                    if (isFirstTimeVerification) {
+                                                        progressDialog.dismiss();
+                                                        startActivity(i);
+                                                    } else {
+                                                        SharedPrefManager.saveUser(email, password);
+                                                        progressDialog.dismiss();
+                                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
+                                                        startActivity(j);
+                                                    }
+                                                }
+                                            }
+
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                progressDialog.dismiss();
+                                                error(e.toString());
+                                            }
+                                        });
                                     }else {
                                         progressDialog.dismiss();
                                         verify();
@@ -148,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
             }else {
                 progressDialog.dismiss();
                 Toasty.error(this, "Password cannot be empty", Toast.LENGTH_SHORT, true).show();
-
             }
         }else {
             progressDialog.dismiss();
@@ -156,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
 
 
     public void forget(View v){

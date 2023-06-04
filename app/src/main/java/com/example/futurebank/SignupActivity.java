@@ -28,6 +28,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 
@@ -98,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
     }
     public void firebase(View v){
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Setting things up...");
+        progressDialog.setMessage("Get Things Ready.....");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -121,37 +125,27 @@ public class SignupActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user =auth.getCurrentUser();
                                         if(user !=null){
-                                            String photoUrl = "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
-                                            UserProfileChangeRequest profileUpdates =new UserProfileChangeRequest.Builder()
-                                                    .setDisplayName("User")
-                                                    .setPhotoUri(Uri.parse(photoUrl))
-                                                    .build();
+                                            DocumentReference userRef = FirebaseFirestore.getInstance()
+                                                    .collection("users")
+                                                    .document(user.getUid());
 
-                                            user.updateProfile(profileUpdates)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            user.sendEmailVerification()
-                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                        @Override
-                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                            if (task.isSuccessful()) {
-                                                                                progressDialog.dismiss();
-                                                                                verify();
-                                                                                startActivity(i);
-                                                                            } else {
-                                                                                progressDialog.dismiss();
-                                                                                error(task.getException().getMessage());
-                                                                            }
-                                                                        }
-                                                                    });
-                                                        } else {
-                                                            progressDialog.dismiss();
-                                                            error(task.getException().getMessage());
+                                            user.sendEmailVerification()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                userRef.set(new HashMap() {{
+                                                                    put("isFirstTimeVerification", true);
+                                                                }});
+                                                                progressDialog.dismiss();
+                                                                verify();
+                                                                startActivity(i);
+                                                            } else {
+                                                                progressDialog.dismiss();
+                                                                error(task.getException().getMessage());
+                                                            }
                                                         }
-                                                    }
-                                                });
+                                                    });
                                         }
                                     } else {
                                         progressDialog.dismiss();

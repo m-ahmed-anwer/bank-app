@@ -74,7 +74,6 @@ public class Exchangerate extends AppCompatActivity {
                             double finalRate = conversionRate * num;
                             to.setText(String.format("%.2f "+sourceCurrency+" = %.2f "+targetCurrency, num, finalRate));
 
-
                         } catch (JSONException e) {
                             error(e.getMessage().toString());
                         }

@@ -73,7 +73,7 @@ public class Exchangerate extends AppCompatActivity {
                             double conversionRate = response.getJSONObject("conversion_rates").getDouble(targetCurrency);
                             double finalRate = conversionRate * num;
                             to.setText(String.format("%.2f "+sourceCurrency+" = %.2f "+targetCurrency, num, finalRate));
-                            // Use the conversion rate for further calculations or display
+
 
                         } catch (JSONException e) {
                             error(e.getMessage().toString());

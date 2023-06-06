@@ -30,8 +30,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -125,18 +127,21 @@ public class SignupActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user =auth.getCurrentUser();
                                         if(user !=null){
+                                            String email =user.getEmail().toString();
                                             DocumentReference userRef = FirebaseFirestore.getInstance()
                                                     .collection("users")
-                                                    .document(user.getUid());
+                                                    .document(email);
 
                                             user.sendEmailVerification()
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                userRef.set(new HashMap() {{
-                                                                    put("isFirstTimeVerification", true);
-                                                                }});
+
+                                                                Map<String, Object> newData = new HashMap<>();
+                                                                newData.put("isFirstTimeVerification", true);
+                                                                userRef.set(newData, SetOptions.merge());
+
                                                                 progressDialog.dismiss();
                                                                 verify();
                                                                 startActivity(i);

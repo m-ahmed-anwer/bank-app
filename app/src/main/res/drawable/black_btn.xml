@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/theme1" /> <!-- Set the color to black -->
+            <corners android:radius="10dp" /> <!-- Set the corner radius as desired -->
+        </shape>
+    </item>
+</selector>

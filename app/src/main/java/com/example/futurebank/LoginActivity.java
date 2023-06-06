@@ -139,12 +139,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                         DocumentReference userRef = FirebaseFirestore.getInstance()
                                                 .collection("users")
-                                                .document(user.getUid());
+                                                .document(user.getEmail());
                                         userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 if (documentSnapshot.exists()) {
                                                     boolean isFirstTimeVerification = documentSnapshot.getBoolean("isFirstTimeVerification");
+
                                                     if (isFirstTimeVerification) {
                                                         progressDialog.dismiss();
                                                         startActivity(i);
@@ -154,6 +155,9 @@ public class LoginActivity extends AppCompatActivity {
                                                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
                                                         startActivity(j);
                                                     }
+                                                }else {
+                                                    progressDialog.dismiss();
+                                                    error("Error Occurred");
                                                 }
                                             }
 

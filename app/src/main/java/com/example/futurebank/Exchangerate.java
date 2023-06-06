@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,48 +57,62 @@ public class Exchangerate extends AppCompatActivity {
         Toasty.error(this, message, Toast.LENGTH_LONG, true).show();
     }
 
+    public void back(View v){
+        Intent i = new Intent(this,HomeActivity.class);
+        startActivity(i);
+    }
     public void convert(View v) {
+        EditText from = findViewById(R.id.conversion);
+        TextView to = findViewById(R.id.convertedTo);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Calculating");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        EditText from = findViewById(R.id.conversion);
-        TextView to = findViewById(R.id.convertedTo);
+        String amountCheck =from.getText().toString().trim();
 
-        double amount = Double.parseDouble(from.getText().toString());
+        if(amountCheck.isEmpty()==false){
+            double amount = Double.parseDouble(from.getText().toString());
 
 
-        final String apiKey = "59931a41a8b52a2d88422cbf";
-        String sourceCurrency = "LKR";
-        String targetCurrency = "USD";
+            final String apiKey = "59931a41a8b52a2d88422cbf";
+            String sourceCurrency = "USD";
+            String targetCurrency = "AED";
 
-        String url = "https://v6.exchangerate-api.com/v6/"+apiKey+"/latest/" + sourceCurrency ;
+            String url = "https://v6.exchangerate-api.com/v6/"+apiKey+"/latest/" + sourceCurrency ;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            double conversionRate = response.getJSONObject("conversion_rates").getDouble(targetCurrency);
-                            double finalRate = conversionRate * amount;
-                            to.setText(String.format("%.2f "+sourceCurrency+" = %.2f "+targetCurrency, amount, finalRate));
-                            progressDialog.dismiss();
-                        } catch (JSONException e) {
-                            progressDialog.dismiss();
-                            error(e.getMessage().toString());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            hideKeyboard();
+                            try {
+                                double conversionRate = response.getJSONObject("conversion_rates").getDouble(targetCurrency);
+                                double finalRate = conversionRate * amount;
+                                to.setText(String.format("%.2f "+targetCurrency, finalRate));
+                                progressDialog.dismiss();
+
+                            } catch (JSONException e) {
+                                progressDialog.dismiss();
+                                error(e.getMessage().toString());
+                            }
+
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            error(error.getMessage().toString());
+                        }
+                    });
+            Volley.newRequestQueue(this).add(jsonObjectRequest);
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        error(error.getMessage().toString());
-                    }
-                });
-                Volley.newRequestQueue(this).add(jsonObjectRequest);
+        }else{
+            progressDialog.dismiss();
+            Toasty.info(this, "Enter amount to convert", Toast.LENGTH_SHORT, true).show();
+        }
 
     }
 }

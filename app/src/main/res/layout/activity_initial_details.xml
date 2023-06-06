@@ -71,10 +71,12 @@
 
         <EditText
             android:id="@+id/dateOfBirth"
-            android:layout_width="320dp"
+            android:layout_width="200dp"
             android:layout_height="40dp"
+            android:layout_marginStart="44dp"
             android:background="@drawable/input_background"
-            android:hint="Select date of birth"
+            android:editable="false"
+            android:hint="Date"
             android:inputType="date"
             android:paddingLeft="10sp"
             android:textColor="@color/black"
@@ -83,8 +85,6 @@
             android:textColorLink="@color/font6"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.398"
@@ -209,14 +209,47 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
+
+
+                <TextView
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/averia_sans_libre_bold"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.478"
+                    tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout9"
+            android:layout_width="89dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="231dp"
+            android:layout_marginEnd="46dp"
+            android:background="@drawable/black_btn"
+            android:onClick="dateSelect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/dateOfBirth"
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
-                android:id="@+id/button3"
+                android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/averia_sans_libre_bold"
-                android:text="Next"
+                android:text="Select Date"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

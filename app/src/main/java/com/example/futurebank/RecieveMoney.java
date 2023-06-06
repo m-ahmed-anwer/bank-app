@@ -106,6 +106,7 @@ public class RecieveMoney extends AppCompatActivity {
 
                                     if (task.isSuccessful()) {
                                         List signInMethods = task.getResult().getSignInMethods();
+
                                         if (signInMethods != null && !signInMethods.isEmpty()) {
 
                                             DocumentReference userRef = FirebaseFirestore.getInstance()

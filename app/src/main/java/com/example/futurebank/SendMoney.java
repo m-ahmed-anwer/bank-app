@@ -22,9 +22,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import es.dmoral.toasty.Toasty;
 
 public class SendMoney extends AppCompatActivity {
@@ -177,6 +174,8 @@ public class SendMoney extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 Intent intent = new Intent(this, ConfirmSendMoney.class);
+                intent.putExtra("AMOUNT", amount);
+                intent.putExtra("EMAIL", email);
                 startActivity(intent);
 
             });

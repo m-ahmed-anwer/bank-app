@@ -164,7 +164,6 @@ public class RecieveMoney extends AppCompatActivity {
                                                             DatabaseReference newItemRef = historyRef.push();
                                                             newItemRef.setValue(historyItem);
 
-
                                                             progressDialog.dismiss();
                                                             sendSucces("Request sent to\n"+email);
                                                         }else {

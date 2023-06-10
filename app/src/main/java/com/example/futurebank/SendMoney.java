@@ -1,39 +1,28 @@
 package com.example.futurebank;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.auth.User;
-import com.google.rpc.context.AttributeContext;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
@@ -41,9 +30,10 @@ import es.dmoral.toasty.Toasty;
 public class SendMoney extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
-    private double recieverAccount ;
-    private double senderAccount ;
+    private double receiverAccount;
+    private double senderAccount;
     private double amount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +52,10 @@ public class SendMoney extends AppCompatActivity {
         update();
     }
 
-    public void back(View v){
-        Intent i = new Intent(this,HomeActivity.class);
-        startActivity(i);
+    public void back(View v) {
+        finish();
     }
+
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
         View view = getCurrentFocus();
@@ -76,20 +66,20 @@ public class SendMoney extends AppCompatActivity {
         view.clearFocus();
     }
 
-    public void error(String message){
+    public void error(String message) {
         Toasty.error(this, message, Toast.LENGTH_LONG, true).show();
     }
 
-    public void sendSucces(String message){
+    public void sendSuccess(String message) {
         Toasty.success(this, message, Toast.LENGTH_LONG, true).show();
     }
 
 
-    public void update(){
+    public void update() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userEmail = null;
         FirebaseUser user = mAuth.getCurrentUser();
-        userEmail=user.getEmail().toString();
+        userEmail = user.getEmail().toString();
 
         TextView accountText = findViewById(R.id.textView13);
         DocumentReference senderuserRef = FirebaseFirestore.getInstance()
@@ -102,14 +92,15 @@ public class SendMoney extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         amount = document.getDouble("account1");
-                        accountText.setText("LKR "+String.format("%.2f", amount));
+                        accountText.setText("LKR " + String.format("%.2f", amount));
                     }
                 }
             }
         });
 
     }
-    public void sendMoney(View v){
+
+    public void sendMoney(View v) {
 
         EditText e = findViewById(R.id.email);
         EditText a = findViewById(R.id.amount);
@@ -120,132 +111,108 @@ public class SendMoney extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String email =e.getText().toString().trim();
-        String amount =a.getText().toString().trim();
+        String email = e.getText().toString().trim();
+        String amount = a.getText().toString().trim();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String accountType="account1";
+        String accountType = "account1";
 
-        double amountSending = Double.parseDouble(amount);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userEmail = firebaseUser.getEmail();
 
-        if(email.isEmpty()==false){
-            if(amount.isEmpty()==false){
-                if(email.equals(userEmail.toString())){
-                    progressDialog.dismiss();
-                    Toasty.info(this, "You need to send for another user", Toast.LENGTH_LONG, true).show();
-                }else{
-                    firebaseAuth.getInstance().fetchSignInMethodsForEmail(email)
-                            .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-
-
-                                    if (task.isSuccessful()) {
-
-                                        List signInMethods = task.getResult().getSignInMethods();
-                                        if (signInMethods != null && !signInMethods.isEmpty()) {
-
-                                            DocumentReference senderuserRef = FirebaseFirestore.getInstance()
-                                                    .collection("users")
-                                                    .document(userEmail);
-                                            senderuserRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        DocumentSnapshot document = task.getResult();
-                                                        if (document.exists()) {
-                                                            senderAccount=document.getDouble(accountType);
-
-                                                            DocumentReference recieveruserRef = FirebaseFirestore.getInstance()
-                                                                    .collection("users")
-                                                                    .document(email);
-
-                                                            recieveruserRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        DocumentSnapshot document = task.getResult();
-                                                                        if (document.exists()) {
-                                                                            recieverAccount=document.getDouble(accountType);
-
-                                                                            if(amountSending<=senderAccount){
-                                                                                double totoalReceiving=recieverAccount+amountSending;
-
-                                                                                double newBalance=senderAccount-amountSending;
-
-                                                                                Map<String, Object> updateSender = new HashMap<>();
-                                                                                updateSender.put("account1", newBalance);
-                                                                                senderuserRef.update(updateSender);
-
-                                                                                Map<String, Object> updateReciver = new HashMap<>();
-                                                                                updateReciver.put("account1", totoalReceiving);
-                                                                                recieveruserRef.update(updateReciver);
-
-
-                                                                                e.setText("");
-                                                                                a.setText("");
-                                                                                hideKeyboard();
-                                                                                progressDialog.dismiss();
-                                                                                sendSucces(amount+" USD sent to\n"+email);
-                                                                                EmailSending em1=new EmailSending();
-                                                                                em1.sendEmail(email,"Money Received","Hello\nYou have received "+amount+" LKR by "+userEmail+".\nYour current account balance is LKR "+totoalReceiving);
-                                                                                em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" LKR to "+email+".\nYour current account balance of "+accountType+" is LKR "+newBalance);
-                                                                                update();
-                                                                            }else {
-                                                                                e.setText("");
-                                                                                a.setText("");
-                                                                                hideKeyboard();
-                                                                                progressDialog.dismiss();
-                                                                                error("Insufficent Balance");
-                                                                            }
-
-                                                                        } else {
-                                                                            progressDialog.dismiss();
-                                                                            error("Error");
-                                                                        }
-                                                                    } else {
-                                                                        progressDialog.dismiss();
-                                                                        task.getException().toString();return;
-                                                                    }
-                                                                }
-                                                            });
-                                                        } else {
-                                                            progressDialog.dismiss();
-                                                            error("Error");
-                                                        }
-                                                    } else {
-                                                        progressDialog.dismiss();
-                                                        task.getException().toString();
-                                                    }
-                                                }
-                                            });
-                                        } else {
-                                            progressDialog.dismiss();
-                                            error("No user on this e-mail");
-                                        }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        error(task.getException().toString());
-                                    }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    progressDialog.dismiss();
-                                    error(e.toString());
-                                }
-                            });
-
-                }
-            }else{
-                progressDialog.dismiss();
-                Toasty.info(this, "Enter amount to send", Toast.LENGTH_SHORT, true).show();
-            }
-        }else{
+        if (email.isEmpty()) {
             progressDialog.dismiss();
             Toasty.info(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
+            return;
+        }
+        if (amount.isEmpty()) {
+            progressDialog.dismiss();
+            Toasty.info(this, "Enter amount to send", Toast.LENGTH_SHORT, true).show();
+            return;
+        }
+        if (email.equals(userEmail)) {
+            progressDialog.dismiss();
+            Toasty.info(this, "You need to send for another user", Toast.LENGTH_LONG, true).show();
+            return;
         }
 
+        double amountSending = Double.parseDouble(amount);
+
+        // Check if account balance sufficient
+        DocumentReference sendingUser = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userEmail);
+        sendingUser.get().addOnCompleteListener((sendUserData) -> {
+            if (!sendUserData.isSuccessful() || !sendUserData.getResult().contains(accountType)) {
+                if (sendUserData.getException() != null) {
+                    Log.e("ERROR", sendUserData.getException().getMessage(), sendUserData.getException());
+                }
+                progressDialog.dismiss();
+                error("Internal error occurred. Try again later");
+                return;
+            }
+            if (sendUserData.getResult().getDouble(accountType) < amountSending) {
+                progressDialog.dismiss();
+                error("You do not have enough funds to perform this transaction.");
+                return;
+            }
+
+            // Check if receive account exist and valid
+            DocumentReference receiveUser = FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(email);
+            receiveUser.get().addOnCompleteListener(receiveUserData -> {
+                if (!receiveUserData.isSuccessful()) {
+                    if (receiveUserData.getException() != null) {
+                        Log.e("ERROR", receiveUserData.getException().getMessage(), receiveUserData.getException());
+                    }
+                    progressDialog.dismiss();
+                    error("Internal error occurred. Try again later");
+                    return;
+                }
+                if (!receiveUserData.getResult().contains(accountType)) {
+                    progressDialog.dismiss();
+                    error("No account found for the given email.");
+                    return;
+                }
+
+                // perform the fund transfer
+                receiverAccount = receiveUserData.getResult().getDouble(accountType);
+                double totalReceiving = receiverAccount + amountSending;
+                senderAccount = sendUserData.getResult().getDouble(accountType);
+                double newBalance = senderAccount - amountSending;
+
+                Map<String, Object> updateReciver = new HashMap<>();
+                updateReciver.put("account1", totalReceiving);
+                receiveUser.update(updateReciver).addOnCompleteListener((receiveStatus) -> {
+                    if (receiveStatus.isSuccessful()) {
+                        Map<String, Object> updateSender = new HashMap<>();
+                        updateSender.put("account1", newBalance);
+                        sendingUser.update(updateSender).addOnCompleteListener((sendStatus) -> {
+                            if (sendStatus.isSuccessful()) {
+                                e.setText("");
+                                a.setText("");
+                                hideKeyboard();
+                                progressDialog.dismiss();
+                                sendSuccess(amount + " LKR sent to\n" + email);
+                                EmailSending em1 = new EmailSending();
+                                em1.sendEmail(email, "Money Received", "Hello\nYou have received " + amount + " LKR by " + userEmail + ".\nYour current account balance is LKR " + totalReceiving);
+                                em1.sendEmail(userEmail, "Money Sent Successfully", "Hello!\nYou have sent " + amount + " LKR to " + email + ".\nYour current account balance of " + accountType + " is LKR " + newBalance);
+                                update();
+                                progressDialog.dismiss();
+                            } else {
+                                error("Transfer failed.");
+                                updateReciver.clear();
+                                updateReciver.put("account1", receiverAccount);
+                                receiveUser.update(updateReciver);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    } else {
+                        error("Transfer failed.");
+                        progressDialog.dismiss();
+                    }
+                });
+            });
+        });
     }
 }

@@ -25,6 +25,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
 
 public class Exchangerate extends AppCompatActivity {
@@ -51,8 +55,13 @@ public class Exchangerate extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner2);
         Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
 
+        String[] stringArray = {"LKR", "USD", "EUR","PKR","AED","GBP","KWD","CAD","AUD"};
 
-        ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(this, R.array.currencies, android.R.layout.simple_spinner_item);
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(stringArray));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,list);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);

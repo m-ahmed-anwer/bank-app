@@ -157,14 +157,13 @@ public class InitialDetails extends AppCompatActivity {
                                     .build();
                             int phone = Integer.parseInt(phoneNum);
 
-                            Map<String, Object> newData = new HashMap<>();
-                            newData.put("account1", 1000.0);
+
 
                             user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Map<String, Object> newData = new HashMap<>();
-                                    newData.put("account1", 0.0);
+                                    newData.put("account1", 1000.0);
                                     newData.put("dateOfBirth", dob);
                                     newData.put("phoneNumber", phone);
                                     newData.put("nic", nic);

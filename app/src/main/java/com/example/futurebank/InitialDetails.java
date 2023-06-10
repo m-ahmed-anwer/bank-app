@@ -34,7 +34,7 @@ import es.dmoral.toasty.Toasty;
 
 public class InitialDetails extends AppCompatActivity {
     private ProgressDialog progressDialog;
-    EditText selectedDateTV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,26 +212,6 @@ public class InitialDetails extends AppCompatActivity {
         }
     }
 
-    public void dateSelect(View v){
-        final Calendar c = Calendar.getInstance();
-
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                InitialDetails.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        selectedDateTV.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                    }
-                },
-                year, month, day);
-        datePickerDialog.show();
-    }
 
 
 

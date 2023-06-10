@@ -42,6 +42,7 @@ public class AccountActivity extends AppCompatActivity {
                     case R.id.menuListCard:
                         return true;
 
+
                     case R.id.menuListSett:
                         startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
                         overridePendingTransition(0,0);

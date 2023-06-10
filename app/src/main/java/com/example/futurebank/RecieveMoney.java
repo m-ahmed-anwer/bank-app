@@ -145,7 +145,7 @@ public class RecieveMoney extends AppCompatActivity {
                                                         if (document.exists()) {
                                                             double accountBalance = document.getDouble("account1");
 
-                                                            String body="Hello!\n"+amount+" USD money is requested by "+userEmail+"\nYou current account balance is LKR "+accountBalance;
+                                                            String body="Hello!\nLKR"+amount+" money is requested by "+userEmail+"\nYou current account balance is LKR "+accountBalance;
 
                                                             EmailSending emailSend=new EmailSending();
                                                             emailSend.sendEmail(email,"Money Requested",body);

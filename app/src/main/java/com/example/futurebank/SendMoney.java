@@ -199,7 +199,7 @@ public class SendMoney extends AppCompatActivity {
                                                                                 DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
                                                                                 DatabaseReference historyRef = usersRef.child(uid).child("history");
 
-                                                                                HistoryItem historyItem = new HistoryItem("Money Sent to", " LKR" + amount, email, R.drawable.baseline_sending);
+                                                                                HistoryItem historyItem = new HistoryItem("Money Sent to", "LKR " + amount, email, R.drawable.baseline_sending);
                                                                                 DatabaseReference newItemRef = historyRef.push();
                                                                                 newItemRef.setValue(historyItem);
 

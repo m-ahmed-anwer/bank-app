@@ -160,7 +160,7 @@ public class RecieveMoney extends AppCompatActivity {
                                                             DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
                                                             DatabaseReference historyRef = usersRef.child(uid).child("history");
 
-                                                            HistoryItem historyItem = new HistoryItem("Money Requested to", " LKR" + amount, email, R.drawable.baseline_receiving);
+                                                            HistoryItem historyItem = new HistoryItem("Money Requested to", "LKR " + amount, email, R.drawable.baseline_receiving);
                                                             DatabaseReference newItemRef = historyRef.push();
                                                             newItemRef.setValue(historyItem);
 

@@ -79,7 +79,7 @@ public class Exchangerate extends AppCompatActivity {
 
             final String apiKey = "59931a41a8b52a2d88422cbf";
             String sourceCurrency = "USD";
-            String targetCurrency = "AED";
+            String targetCurrency = "LKR";
 
             String url = "https://v6.exchangerate-api.com/v6/"+apiKey+"/latest/" + sourceCurrency ;
 

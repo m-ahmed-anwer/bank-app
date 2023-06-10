@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     } else {
                                                         SharedPrefManager.saveUser(email, password);
                                                         progressDialog.dismiss();
-                                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
+                                                        j.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
                                                         startActivity(j);
                                                     }
                                                 }else {

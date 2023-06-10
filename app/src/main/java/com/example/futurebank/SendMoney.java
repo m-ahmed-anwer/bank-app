@@ -10,8 +10,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +43,7 @@ public class SendMoney extends AppCompatActivity {
 
     private double recieverAccount ;
     private double senderAccount ;
-
+    private double amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class SendMoney extends AppCompatActivity {
                 return false;
             }
         });
+        update();
     }
 
     public void back(View v){
@@ -77,6 +81,32 @@ public class SendMoney extends AppCompatActivity {
 
     public void sendSucces(String message){
         Toasty.success(this, message, Toast.LENGTH_LONG, true).show();
+    }
+
+
+    public void update(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userEmail = null;
+        FirebaseUser user = mAuth.getCurrentUser();
+        userEmail=user.getEmail().toString();
+
+        TextView accountText = findViewById(R.id.textView13);
+        DocumentReference senderuserRef = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userEmail);
+        senderuserRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        amount = document.getDouble("account1");
+                        accountText.setText("LKR "+String.format("%.2f", amount));
+                    }
+                }
+            }
+        });
+
     }
     public void sendMoney(View v){
 
@@ -160,13 +190,12 @@ public class SendMoney extends AppCompatActivity {
                                                                                 EmailSending em1=new EmailSending();
                                                                                 em1.sendEmail(email,"Money Received Successfully","Hello\nYou have received "+amount+" USD by "+userEmail+".\nYour current account balance is USD "+totoalReceiving);
                                                                                 em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" USD to "+email+".\nYour current account balance of "+accountType+" is USD "+newBalance);
-
+                                                                                update();
                                                                             }else {
                                                                                 e.setText("");
                                                                                 a.setText("");
                                                                                 hideKeyboard();
                                                                                 progressDialog.dismiss();
-
                                                                                 error("Insufficent Balance");
                                                                             }
 

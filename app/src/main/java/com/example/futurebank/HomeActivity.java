@@ -13,21 +13,29 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
 
 
+    private double amount;
     BottomNavigationView bottomNavigationViewiew;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -57,6 +65,41 @@ public class HomeActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMM");
         String dateString = dateFormat.format(currentDate);
          date=dateString.toString();
+
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userEmail = null;
+        FirebaseUser user = mAuth.getCurrentUser();
+
+
+        userEmail=user.getEmail().toString();
+        String photoUrl = user.getPhotoUrl().toString();
+
+        ImageView imageView = findViewById(R.id.imageView6);
+        imageView.setBackgroundResource(R.drawable.image_background);
+        Glide.with(this)
+                .load(photoUrl)
+                .into(imageView);
+
+
+        TextView accountText = findViewById(R.id.textView13);
+
+        DocumentReference senderuserRef = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userEmail);
+        senderuserRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        amount = document.getDouble("account1");
+                        accountText.setText("LKR "+String.format("%.2f", amount));
+                    }
+                }
+            }
+        });
 
 
 

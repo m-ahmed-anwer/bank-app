@@ -101,12 +101,8 @@ public class RecieveMoney extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-
-
-
                                     if (task.isSuccessful()) {
                                         List signInMethods = task.getResult().getSignInMethods();
-
                                         if (signInMethods != null && !signInMethods.isEmpty()) {
 
                                             DocumentReference userRef = FirebaseFirestore.getInstance()

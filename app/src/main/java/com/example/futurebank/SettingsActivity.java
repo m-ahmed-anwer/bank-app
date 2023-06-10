@@ -210,7 +210,9 @@ public class SettingsActivity extends AppCompatActivity {
         auth.signOut();
         SharedPrefManager.clear();
         Toasty.info(this, "You have been Signed Out", Toast.LENGTH_SHORT, true).show();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        Intent i= new Intent(getApplicationContext(),MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Destroy previous activities and clear Activity stack
+        startActivity(i);
     }
 
 

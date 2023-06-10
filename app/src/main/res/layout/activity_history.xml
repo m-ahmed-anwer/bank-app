@@ -23,6 +23,7 @@ tools:context=".History">
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
+
         <View
             android:id="@+id/imageView5"
             android:layout_width="50dp"

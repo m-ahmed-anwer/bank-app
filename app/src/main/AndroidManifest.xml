@@ -22,6 +22,9 @@
             android:name=".History"
             android:exported="false" />
         <activity
+            android:name=".ConfirmSendMoney"
+            android:exported="false" />
+        <activity
             android:name=".InitialDetails"
             android:exported="false" />
 

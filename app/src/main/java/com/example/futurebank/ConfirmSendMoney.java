@@ -1,7 +1,9 @@
 package com.example.futurebank;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -10,9 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +26,7 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class SendMoney extends AppCompatActivity {
+public class ConfirmSendMoney extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private double receiverAccount;
@@ -37,7 +36,7 @@ public class SendMoney extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_money);
+        setContentView(R.layout.activity_confirm_send_money);
 
         View mainView = findViewById(R.id.scrollView2);
         mainView.setOnTouchListener(new View.OnTouchListener() {
@@ -101,15 +100,8 @@ public class SendMoney extends AppCompatActivity {
     }
 
     public void sendMoney(View v) {
-
         EditText e = findViewById(R.id.email);
         EditText a = findViewById(R.id.amount);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Processing");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
 
         String email = e.getText().toString().trim();
         String amount = a.getText().toString().trim();
@@ -118,23 +110,6 @@ public class SendMoney extends AppCompatActivity {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userEmail = firebaseUser.getEmail();
-
-        if (email.isEmpty()) {
-            progressDialog.dismiss();
-            Toasty.info(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
-            return;
-        }
-        if (amount.isEmpty()) {
-            progressDialog.dismiss();
-            Toasty.info(this, "Enter amount to send", Toast.LENGTH_SHORT, true).show();
-            return;
-        }
-        if (email.equals(userEmail)) {
-            progressDialog.dismiss();
-            Toasty.info(this, "You need to send for another user", Toast.LENGTH_LONG, true).show();
-            return;
-        }
-
         double amountSending = Double.parseDouble(amount);
 
         // Check if account balance sufficient
@@ -175,10 +150,43 @@ public class SendMoney extends AppCompatActivity {
                     return;
                 }
 
-                progressDialog.dismiss();
-                Intent intent = new Intent(this, ConfirmSendMoney.class);
-                startActivity(intent);
+                // perform the fund transfer
+                receiverAccount = receiveUserData.getResult().getDouble(accountType);
+                double totalReceiving = receiverAccount + amountSending;
+                senderAccount = sendUserData.getResult().getDouble(accountType);
+                double newBalance = senderAccount - amountSending;
 
+                Map<String, Object> updateReciver = new HashMap<>();
+                updateReciver.put("account1", totalReceiving);
+                receiveUser.update(updateReciver).addOnCompleteListener((receiveStatus) -> {
+                    if (receiveStatus.isSuccessful()) {
+                        Map<String, Object> updateSender = new HashMap<>();
+                        updateSender.put("account1", newBalance);
+                        sendingUser.update(updateSender).addOnCompleteListener((sendStatus) -> {
+                            if (sendStatus.isSuccessful()) {
+                                e.setText("");
+                                a.setText("");
+                                hideKeyboard();
+                                progressDialog.dismiss();
+                                sendSuccess(amount + " LKR sent to\n" + email);
+                                EmailSending em1 = new EmailSending();
+                                em1.sendEmail(email,"Money Received","Hello\nYou have received LKR " + amount + " by " + userEmail + ".\nYour current account balance is LKR " + totalReceiving);
+                                em1.sendEmail(userEmail, "Money Sent Successfully", "Hello!\nYou have sent " + amount + " LKR to " + email + ".\nYour current account balance of " + accountType + " is LKR " + newBalance);
+                                update();
+                                progressDialog.dismiss();
+                            } else {
+                                error("Transfer failed.");
+                                updateReciver.clear();
+                                updateReciver.put("account1", receiverAccount);
+                                receiveUser.update(updateReciver);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    } else {
+                        error("Transfer failed.");
+                        progressDialog.dismiss();
+                    }
+                });
             });
         });
     }

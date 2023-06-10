@@ -158,7 +158,6 @@ public class InitialDetails extends AppCompatActivity {
                             int phone = Integer.parseInt(phoneNum);
 
 
-
                             user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

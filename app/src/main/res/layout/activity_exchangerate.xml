@@ -49,7 +49,8 @@ tools:context=".Exchangerate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/chevron_left" />
+                app:srcCompat="@drawable/chevron_left"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -89,10 +90,11 @@ tools:context=".Exchangerate"
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="330dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="32dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/exchange_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,13 +117,14 @@ tools:context=".Exchangerate"
                 android:layout_height="36dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="45dp"
                 android:background="@drawable/theme1_button"
                 android:onClick="convert"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TouchTargetSizeCheck">
 
                 <TextView
                     android:id="@+id/button3"
@@ -190,19 +193,20 @@ tools:context=".Exchangerate"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
-                android:padding="5dp"
                 android:background="@drawable/amount_input"
+                android:padding="5dp"
+                style="@style/Widget.AppCompat.Spinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
             <Spinner
                 android:id="@+id/spinner3"
                 android:layout_width="100dp"
-                android:background="@drawable/amount_input"
-                android:padding="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="220dp"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/amount_input"
+                android:padding="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
@@ -211,16 +215,18 @@ tools:context=".Exchangerate"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
 
-                android:paddingLeft="8dp"
-                android:drawableBottom="@drawable/input_exchangerate"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="7dp"
+                android:background="@drawable/border_bottom"
+                android:drawableBottom="@drawable/input_exchangerate"
                 android:ems="10"
                 android:inputType="numberDecimal"
+                android:paddingLeft="8dp"
                 android:textColor="@color/font3"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                app:layout_constraintTop_toBottomOf="@+id/textView35"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

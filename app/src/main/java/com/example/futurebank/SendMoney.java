@@ -1,7 +1,6 @@
 package com.example.futurebank;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -195,7 +194,7 @@ public class SendMoney extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 sendSuccess(amount + " LKR sent to\n" + email);
                                 EmailSending em1 = new EmailSending();
-                                em1.sendEmail(email, "Money Received", "Hello\nYou have received " + amount + " LKR by " + userEmail + ".\nYour current account balance is LKR " + totalReceiving);
+                                em1.sendEmail(email,"Money Received","Hello\nYou have received LKR " + amount + " by " + userEmail + ".\nYour current account balance is LKR " + totalReceiving);
                                 em1.sendEmail(userEmail, "Money Sent Successfully", "Hello!\nYou have sent " + amount + " LKR to " + email + ".\nYour current account balance of " + accountType + " is LKR " + newBalance);
                                 update();
                                 progressDialog.dismiss();

@@ -13,6 +13,17 @@
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
 
+    <string-array name="currencies">
+        <item>LKR</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>PKR</item>
+        <item>AED</item>
+        <item>GBP</item>
+        <item>KWD</item>
+        <item>CAD</item>
+        <item>AUD</item>
+    </string-array>
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>

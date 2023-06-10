@@ -134,8 +134,8 @@ public class SendMoney extends AppCompatActivity {
         String userEmail = firebaseUser.getEmail();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if(email.isEmpty()==false){
-            if(amount.isEmpty()==false){
+        if(amount.isEmpty()==false){
+            if(email.isEmpty()==false){
                 if(email.equals(userEmail.toString())){
                     progressDialog.dismiss();
                     Toasty.info(this, "You need to send for another user", Toast.LENGTH_LONG, true).show();
@@ -178,6 +178,9 @@ public class SendMoney extends AppCompatActivity {
                                                                                 double totoalReceiving=recieverAccount+amountSending;
 
                                                                                 double newBalance=senderAccount-amountSending;
+                                                                                e.setText("");
+                                                                                a.setText("");
+                                                                                hideKeyboard();
 
                                                                                 Map<String, Object> updateSender = new HashMap<>();
                                                                                 updateSender.put("account1", newBalance);
@@ -186,12 +189,6 @@ public class SendMoney extends AppCompatActivity {
                                                                                 Map<String, Object> updateReciver = new HashMap<>();
                                                                                 updateReciver.put("account1", totoalReceiving);
                                                                                 recieveruserRef.update(updateReciver);
-
-                                                                                e.setText("");
-                                                                                a.setText("");
-                                                                                hideKeyboard();
-                                                                                progressDialog.dismiss();
-                                                                                sendSucces(amount+" USD sent to\n"+email);
 
 
 
@@ -206,8 +203,11 @@ public class SendMoney extends AppCompatActivity {
 
                                                                                 EmailSending em1=new EmailSending();
                                                                                 em1.sendEmail(email,"Money Received","Hello\nYou have received LKR "+amount+" by "+userEmail+".\nYour current account balance is LKR "+totoalReceiving);
-                                                                                em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" LKR to "+email+".\nYour current account balance of "+accountType+" is LKR "+newBalance);
+                                                                                em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent LKR "+amount+" to "+email+".\nYour current account balance of "+accountType+" is LKR "+newBalance);
                                                                                 update();
+                                                                                progressDialog.dismiss();
+                                                                                sendSucces("LKR "+amount+" sent to\n"+email);
+
 
                                                                             }else {
                                                                                 e.setText("");
@@ -257,11 +257,11 @@ public class SendMoney extends AppCompatActivity {
                 }
             }else{
                 progressDialog.dismiss();
-                Toasty.info(this, "Enter amount to send", Toast.LENGTH_SHORT, true).show();
+                Toasty.info(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
             }
         }else{
             progressDialog.dismiss();
-            Toasty.info(this, "Email cannot be empty", Toast.LENGTH_SHORT, true).show();
+            Toasty.info(this, "Enter amount to send", Toast.LENGTH_SHORT, true).show();
         }
 
     }

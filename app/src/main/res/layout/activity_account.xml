@@ -156,6 +156,7 @@
                 android:layout_marginTop="34dp"
                 android:layout_marginEnd="45dp"
                 android:background="@color/theme2"
+                android:onClick="addAccount"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_add_24" />

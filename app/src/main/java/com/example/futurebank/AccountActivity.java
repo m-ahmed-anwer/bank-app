@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,6 +54,11 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
         update();
+    }
+
+    public void addAccount(View v){
+        Intent i = new Intent(this,AddAcount.class);
+        startActivity(i);
     }
 
 

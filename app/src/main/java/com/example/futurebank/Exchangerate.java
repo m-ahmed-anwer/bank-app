@@ -51,17 +51,8 @@ public class Exchangerate extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner2);
         Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
 
-        adapter.add("LKR");
-        adapter.add("USD");
-        adapter.add("EUR");
-        adapter.add("PKR");
-        adapter.add("AED");
-        adapter.add("GBP");
-        adapter.add("KWD");
-        adapter.add("CAD");
-        adapter.add("AUD");
+        ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(this, R.array.currencies, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);

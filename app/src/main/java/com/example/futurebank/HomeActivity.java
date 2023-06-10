@@ -102,21 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
-         /*
-        FirebaseMessaging.getInstance().subscribeToTopic("Future Bank request Ahmed")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Done";
-                        if (!task.isSuccessful()) {
-                            msg = "Failed";
-                        }
-
-                    }
-                });
-    */
-
         ((TextView)findViewById(R.id.dateView)).setText(date);
 
         bottomNavigationViewiew = findViewById(R.id.bottomNavigator);
@@ -147,28 +132,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showsend(View v){
-        //myRef.setValue("Edit");
+
         startActivity(new Intent(getApplicationContext(),SendMoney.class));
     }
     public void showrecieve(View v){
-        /*
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-                ((TextView)findViewById(R.id.textView8)).setText(value);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("","Failed");
-            }
-        });
-         */
         startActivity(new Intent(getApplicationContext(),RecieveMoney.class));
     }
     public void showhistory(View v){
-        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+        startActivity(new Intent(getApplicationContext(),History.class));
     }
     public void showrate(View v){
         startActivity(new Intent(getApplicationContext(), Exchangerate.class));

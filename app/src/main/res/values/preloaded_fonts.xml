@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/acme</item>
+        <item>@font/allerta</item>
+        <item>@font/archivo_bold</item>
+        <item>@font/archivo_semibold</item>
         <item>@font/averia_sans_libre</item>
         <item>@font/averia_sans_libre_bold</item>
         <item>@font/averia_sans_libre_light</item>

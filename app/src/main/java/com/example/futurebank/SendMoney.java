@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -24,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +35,7 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.auth.User;
 import com.google.rpc.context.AttributeContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,6 +132,7 @@ public class SendMoney extends AppCompatActivity {
         double amountSending = Double.parseDouble(amount);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         String userEmail = firebaseUser.getEmail();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if(email.isEmpty()==false){
             if(amount.isEmpty()==false){
@@ -182,16 +187,28 @@ public class SendMoney extends AppCompatActivity {
                                                                                 updateReciver.put("account1", totoalReceiving);
                                                                                 recieveruserRef.update(updateReciver);
 
-
                                                                                 e.setText("");
                                                                                 a.setText("");
                                                                                 hideKeyboard();
                                                                                 progressDialog.dismiss();
                                                                                 sendSucces(amount+" USD sent to\n"+email);
+
+
+
+                                                                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                                                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                                                                                DatabaseReference historyRef = usersRef.child(uid).child("history");
+
+                                                                                HistoryItem historyItem = new HistoryItem("Money Sent to", "LKR" + amount, email, R.drawable.baseline_sending);
+                                                                                DatabaseReference newItemRef = historyRef.push();
+                                                                                newItemRef.setValue(historyItem);
+
+
                                                                                 EmailSending em1=new EmailSending();
                                                                                 em1.sendEmail(email,"Money Received","Hello\nYou have received LKR "+amount+" by "+userEmail+".\nYour current account balance is LKR "+totoalReceiving);
                                                                                 em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" LKR to "+email+".\nYour current account balance of "+accountType+" is LKR "+newBalance);
                                                                                 update();
+
                                                                             }else {
                                                                                 e.setText("");
                                                                                 a.setText("");

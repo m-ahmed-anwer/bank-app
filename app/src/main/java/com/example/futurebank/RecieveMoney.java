@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -153,13 +155,25 @@ public class RecieveMoney extends AppCompatActivity {
                                                             e.setText("");
                                                             a.setText("");
                                                             hideKeyboard();
+
+                                                            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                                                            DatabaseReference historyRef = usersRef.child(uid).child("history");
+
+                                                            HistoryItem historyItem = new HistoryItem("Money Requested to", "LKR" + amount, email, R.drawable.baseline_receiving);
+                                                            DatabaseReference newItemRef = historyRef.push();
+                                                            newItemRef.setValue(historyItem);
+
+
                                                             progressDialog.dismiss();
                                                             sendSucces("Request sent to\n"+email);
                                                         }else {
+                                                            hideKeyboard();
                                                             progressDialog.dismiss();
                                                             error("No data");
                                                         }
                                                     } else {
+                                                        hideKeyboard();
                                                         progressDialog.dismiss();
                                                         error(task.getException().toString());
                                                     }
@@ -169,10 +183,12 @@ public class RecieveMoney extends AppCompatActivity {
 
 
                                         } else {
+                                            hideKeyboard();
                                             progressDialog.dismiss();
                                             error("User doesn't exists");
                                         }
                                     } else {
+                                        hideKeyboard();
                                         progressDialog.dismiss();
                                         error(task.getException().toString());
                                     }
@@ -180,6 +196,7 @@ public class RecieveMoney extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    hideKeyboard();
                                     progressDialog.dismiss();
                                     error(e.toString());
                                 }

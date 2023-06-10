@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +30,14 @@ import es.dmoral.toasty.Toasty;
 public class Exchangerate extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
+    private String selectedItem2;
+    private String selectedItem1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchangerate);
 
-        View mainView = findViewById(R.id.exchangeRateActivity);
+        View mainView = findViewById(R.id.scrollView2);
         mainView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -42,6 +47,54 @@ public class Exchangerate extends AppCompatActivity {
                 return false;
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner2);
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+
+        adapter.add("LKR");
+        adapter.add("USD");
+        adapter.add("EUR");
+        adapter.add("PKR");
+        adapter.add("AED");
+        adapter.add("GBP");
+        adapter.add("KWD");
+        adapter.add("CAD");
+        adapter.add("AUD");
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+        spinner2.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Handle item selection
+                selectedItem1 = (String) parent.getItemAtPosition(position);
+                spinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle case when no item is selected
+            }
+        });
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Handle item selection
+                selectedItem2 = (String) parent.getItemAtPosition(position);
+                spinner2.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle case when no item is selected
+            }
+        });
+
     }
 
 
@@ -52,6 +105,7 @@ public class Exchangerate extends AppCompatActivity {
             view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
     public void error(String message){
         Toasty.error(this, message, Toast.LENGTH_LONG, true).show();
@@ -78,8 +132,8 @@ public class Exchangerate extends AppCompatActivity {
 
 
             final String apiKey = "59931a41a8b52a2d88422cbf";
-            String sourceCurrency = "USD";
-            String targetCurrency = "LKR";
+            String sourceCurrency = selectedItem1;
+            String targetCurrency = selectedItem2;
 
             String url = "https://v6.exchangerate-api.com/v6/"+apiKey+"/latest/" + sourceCurrency ;
 

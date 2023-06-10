@@ -49,7 +49,7 @@ public class SendMoney extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_money);
 
-        View mainView = findViewById(R.id.sendMoneyActivity);
+        View mainView = findViewById(R.id.scrollView2);
         mainView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -73,6 +73,7 @@ public class SendMoney extends AppCompatActivity {
             view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
 
     public void error(String message){
@@ -188,8 +189,8 @@ public class SendMoney extends AppCompatActivity {
                                                                                 progressDialog.dismiss();
                                                                                 sendSucces(amount+" USD sent to\n"+email);
                                                                                 EmailSending em1=new EmailSending();
-                                                                                em1.sendEmail(email,"Money Received Successfully","Hello\nYou have received "+amount+" USD by "+userEmail+".\nYour current account balance is USD "+totoalReceiving);
-                                                                                em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" USD to "+email+".\nYour current account balance of "+accountType+" is USD "+newBalance);
+                                                                                em1.sendEmail(email,"Money Received","Hello\nYou have received "+amount+" LKR by "+userEmail+".\nYour current account balance is LKR "+totoalReceiving);
+                                                                                em1.sendEmail(userEmail.toString(),"Money Sent Successfully","Hello!\nYou have sent "+amount+" LKR to "+email+".\nYour current account balance of "+accountType+" is LKR "+newBalance);
                                                                                 update();
                                                                             }else {
                                                                                 e.setText("");
@@ -221,7 +222,7 @@ public class SendMoney extends AppCompatActivity {
                                             });
                                         } else {
                                             progressDialog.dismiss();
-                                            error("User doesn't exists");
+                                            error("No user on this e-mail");
                                         }
                                     } else {
                                         progressDialog.dismiss();

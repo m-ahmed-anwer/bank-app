@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +32,7 @@ import es.dmoral.toasty.Toasty;
 
 public class RecieveMoney extends AppCompatActivity {
     private ProgressDialog progressDialog;
+    private double amount;
 
 
     @Override
@@ -38,7 +40,7 @@ public class RecieveMoney extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recieve_money);
 
-        View mainView = findViewById(R.id.receiveMoneyActivity);
+        View mainView = findViewById(R.id.scrollView2);
         mainView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -48,8 +50,33 @@ public class RecieveMoney extends AppCompatActivity {
                 return false;
             }
         });
+        update();
 
     }
+    public void update(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userEmail = null;
+        FirebaseUser user = mAuth.getCurrentUser();
+        userEmail=user.getEmail().toString();
+
+        TextView accountText = findViewById(R.id.textView13);
+        DocumentReference senderuserRef = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userEmail);
+        senderuserRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        amount = document.getDouble("account1");
+                        accountText.setText("LKR "+String.format("%.2f", amount));
+                    }
+                }
+            }
+        });
+    }
+
     public void back(View v){
         Intent i = new Intent(this,HomeActivity.class);
         startActivity(i);
@@ -61,6 +88,7 @@ public class RecieveMoney extends AppCompatActivity {
             view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
 
     public void error(String message){
@@ -117,7 +145,7 @@ public class RecieveMoney extends AppCompatActivity {
                                                         if (document.exists()) {
                                                             double accountBalance = document.getDouble("account1");
 
-                                                            String body="Hello!\n"+amount+" USD money is requested by "+userEmail+"\nYou current account balance is "+accountBalance+" USD";
+                                                            String body="Hello!\n"+amount+" USD money is requested by "+userEmail+"\nYou current account balance is LKR "+accountBalance;
 
                                                             EmailSending emailSend=new EmailSending();
                                                             emailSend.sendEmail(email,"Money Requested",body);

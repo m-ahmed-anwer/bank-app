@@ -48,6 +48,7 @@ public class ForgetPassword extends AppCompatActivity {
             view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
 
     public void back(View v){

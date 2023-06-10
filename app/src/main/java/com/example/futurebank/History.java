@@ -53,6 +53,7 @@ public class History extends AppCompatActivity {
                 if (snapshot.exists()) {
                     item.clear();
                     yourTextView.setText(null);
+
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         String account = childSnapshot.child("account").getValue(String.class).toString();
                         String email = childSnapshot.child("email").getValue(String.class).toString();

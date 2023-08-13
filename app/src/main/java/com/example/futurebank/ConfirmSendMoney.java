@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,6 +102,7 @@ public class ConfirmSendMoney extends AppCompatActivity {
                     if (document.exists()) {
                         amount = document.getDouble("account1");
                         accountText.setText("LKR " + String.format("%.2f", amount));
+
                     }
                 }
             }
@@ -183,11 +186,21 @@ public class ConfirmSendMoney extends AppCompatActivity {
                                 em1.sendEmail(email,"Money Received","Hello\nYou have received LKR " + amount + " by " + userEmail + ".\nYour current account balance is LKR " + totalReceiving);
                                 em1.sendEmail(userEmail, "Money Sent Successfully", "Hello!\nYou have sent " + amount + " LKR to " + email + ".\nYour current account balance of " + accountType + " is LKR " + newBalance);
                                 update();
+
+                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                                DatabaseReference historyRef = usersRef.child(uid).child("history");
+
+                                HistoryItem historyItem = new HistoryItem("Money Sent to", "LKR " + amount, email, R.drawable.baseline_sending);
+                                DatabaseReference newItemRef = historyRef.push();
+                                newItemRef.setValue(historyItem);
+
                                 progressDialog.dismiss();
 
                                 Intent intent = new Intent(this, SendMoneySuccess.class);
                                 intent.putExtra("AMOUNT", amount);
                                 intent.putExtra("EMAIL", email);
+
                                 startActivity(intent);
                             } else {
                                 updateReciver.clear();
